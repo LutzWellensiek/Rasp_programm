@@ -6,7 +6,7 @@ ser = serial.Serial('/dev/ttyAMA3', 115200, timeout=1)
 
 # Dauerschleife
 while True:
-    message = 'Hallo vom Raspberry Pi!\n'
+    message = '\nHallo vom Raspberry Pi!'
     print("Sende:", message.strip())
     ser.write(message.encode('utf-8'))
     time.sleep(5)
