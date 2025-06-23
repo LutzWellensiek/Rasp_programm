@@ -29,7 +29,7 @@ if __name__ == "__main__":
     input_thread.start()
 
     i = 0
-    while i < 10 and not stop_flag:  # 10 Messungen, alle 10 Sekunden oder bis "close"
+    while not stop_flag:  # Endlosschleife bis "close" eingegeben wird
         temp = get_temperature(city=city, api_key=api_key)
         print(f"Messung {i+1}: Temperatur in {city}: {temp}°C")
         for _ in range(100):  # 10 Sekunden in 0.1s-Schritten, damit schneller auf "close" reagiert wird
