@@ -1,5 +1,6 @@
 import requests
 import time
+import threading
 
 def get_temperature(city="Berlin", api_key="YOUR_API_KEY"):
     url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&units=metric&appid={api_key}"
@@ -11,31 +12,30 @@ def get_temperature(city="Berlin", api_key="YOUR_API_KEY"):
 import matplotlib.pyplot as plt
 
 if __name__ == "__main__":
-    temperatures = []
-    timestamps = []
+
     api_key = "e23328f8e1c2b12c30a3b13c49c62ddb"
     city = "Pforzheim"
+    stop_flag = False
 
-    plt.ion()
-    fig, ax = plt.subplots()
-    line, = ax.plot(timestamps, temperatures, marker='o')
-    ax.set_xlabel("Zeit (s)")
-    ax.set_ylabel("Temperatur (°C)")
-    ax.set_title(f"Temperaturverlauf in {city}")
+    def check_input():
+        global stop_flag
+        while True:
+            user_input = input()
+            if user_input.strip().lower() == "close":
+                stop_flag = True
+                break
 
-    start_time = time.time()
-    for i in range(10):  # 10 Messungen, alle 10 Sekunden
+    input_thread = threading.Thread(target=check_input, daemon=True)
+    input_thread.start()
+
+    i = 0
+    while i < 10 and not stop_flag:  # 10 Messungen, alle 10 Sekunden oder bis "close"
         temp = get_temperature(city=city, api_key=api_key)
-        current_time = int(time.time() - start_time)
-        temperatures.append(temp)
-        timestamps.append(current_time)
-        line.set_xdata(timestamps)
-        line.set_ydata(temperatures)
-        ax.relim()
-        ax.autoscale_view()
-        plt.draw()
-        plt.pause(0.1)
-        time.sleep(10)
+        print(f"Messung {i+1}: Temperatur in {city}: {temp}°C")
+        for _ in range(100):  # 10 Sekunden in 0.1s-Schritten, damit schneller auf "close" reagiert wird
+            if stop_flag:
+                break
+            time.sleep(0.1)
+        i += 1
 
-    plt.ioff()
-    plt.show()
+    print("Messungen beendet.")
