@@ -9,5 +9,5 @@ def get_temperature(city="Berlin", api_key="YOUR_API_KEY"):
 
 if __name__ == "__main__":
     # Ersetze 'YOUR_API_KEY' mit deinem OpenWeatherMap API-Schlüssel
-    temperature = get_temperature(city="Berlin", api_key="YOUR_API_KEY")
-    print(f"Aktuelle Temperatur in Berlin: {temperature}°C")
+    temperature = get_temperature(city="Pforzheim", api_key="e23328f8e1c2b12c30a3b13c49c62ddb")
+    print(f"Aktuelle Temperatur in Pforzheim: {temperature}°C")
