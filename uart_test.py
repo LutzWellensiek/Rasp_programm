@@ -1,11 +1,12 @@
 import serial
 import time
 
-# Öffne serielle Verbindung (z. B. an /dev/serial0)
-ser = serial.Serial('/dev/serial0', 9600, timeout=1)
+# Öffne serielle Verbindung auf UART3 (GPIO4/5)
+ser = serial.Serial('/dev/ttyS3', 9600, timeout=1)
 
 # Dauerschleife
 while True:
-    print("Sende: Hallo vom Raspberry Pi!")
-    ser.write(b'Hallo vom Raspberry Pi!\n')
-    time.sleep(1)
+    message = 'Hallo vom Raspberry Pi!\n'
+    print("Sende:", message.strip())
+    ser.write(message.encode('utf-8'))
+    time.sleep(5)
