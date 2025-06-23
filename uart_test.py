@@ -24,7 +24,7 @@ print("Letzter Git-Push/Commit:", get_last_git_push_time())
 
 # Dauerschleife
 while True:
-    message = 'Hallo vom Raspberry Pi!\n'
+    message = 'x\n'
     print("Sende:", message.strip())
     ser.write(message.encode('utf-8'))
     ser.flush()
