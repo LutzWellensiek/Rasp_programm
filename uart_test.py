@@ -2,7 +2,7 @@ import serial
 import time
 
 # Öffne serielle Verbindung auf UART3 (GPIO4/5)
-ser = serial.Serial('/dev/ttyS3', 9600, timeout=1)
+ser = serial.Serial('/dev/ttyAMA3', 9600, timeout=1)
 
 # Dauerschleife
 while True:
