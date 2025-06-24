@@ -24,7 +24,7 @@ print("Letzter Git-Push/Commit:", get_last_git_push_time())
 
 # Dauerschleife
 while True:
-    message = 'x\n'
+    message = 'Das ist der rasp von lutz\n'
     print("Sende:", message.strip())
     ser.write(message.encode('utf-8'))
     ser.flush()
